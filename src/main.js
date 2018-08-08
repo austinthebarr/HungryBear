@@ -42,7 +42,6 @@ $(function () {
 
   $('#giphy').click(function () {
     let gif = $('.gif').val();
-    $('#giph').val("");
 
     let promise = new Promise(function (resolve, reject) {
       let request = new XMLHttpRequest();
@@ -53,7 +52,7 @@ $(function () {
         } else {
           reject(Error(request.statusText));
         }
-      }
+      };
       request.open("GET", url, true);
       request.send();
     });
@@ -62,7 +61,7 @@ $(function () {
       const body = JSON.parse(response);
       $('.gifSpot').append(`<img src ="${body.data[0].images.original.url}"/>`);
     }, function (error) {
-      $('.gifSpot').text(`ERROR!`);
+      $('.gifSpot').text(`ERROR:${error.statusText}!`);
 
     });
   });
